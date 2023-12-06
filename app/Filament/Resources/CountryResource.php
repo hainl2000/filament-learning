@@ -39,10 +39,6 @@ class CountryResource extends Resource
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phonecode')
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
