@@ -40,12 +40,12 @@ class CustomRequestPasswordReset extends RequestPasswordReset
                 if (! method_exists($user, 'notify')) {
                     $userClass = $user::class;
 
-                    throw new Exception("Model [{$userClass}] does not have a [notify()] method.");
+                    throw new \Exception("Model [{$userClass}] does not have a [notify()] method.");
                 }
 
                 $notification = new ResetPasswordNotification($token);
                 $notification->url = Filament::getResetPasswordUrl($token, $user);
-//                $user->notify($notification);
+                $user->notify($notification);
             },
         );
 

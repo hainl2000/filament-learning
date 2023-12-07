@@ -5,9 +5,11 @@ namespace App\Filament\Widgets;
 use App\Models\Fee;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Get;
+use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -16,10 +18,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Set;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Livewire\Form;
+use Livewire\Livewire;
 use Webbingbrasil\FilamentAdvancedFilter\Filters\DateFilter;
 
 class TestOrder extends BaseWidget
 {
+    use InteractsWithActions;
+
     protected int | string | array $columnSpan = 'full';
 
     public $testData = 1;
@@ -47,11 +53,6 @@ class TestOrder extends BaseWidget
                             '2' => 'type 2',
                     ])
                     ->default(1)
-                    ->before(function (Set $set, $state) {
-                        $this->testData = $state;
-                        Log::info($this->testData);
-//                        $set('created_to', now());
-                    })
                     ->native(false),
                 DatePicker::make('created_from')
                     ->label('')
